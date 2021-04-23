@@ -1,0 +1,10 @@
+
+Task #1:order statistics -
+1. inside unkow int array find:
+1.2 the first smallest number.
+1.2 the second smallest number.
+
+
+
+https://www.youtube.com/watch?v=D35llNtkCps&list=PL5Tw98-9k5IbDQnT09Za8Ndr1ZCZPmCU9&index=5
+

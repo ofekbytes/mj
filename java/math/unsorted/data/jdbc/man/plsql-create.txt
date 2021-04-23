@@ -1,0 +1,139 @@
+CREATE TABLE `test1`.`employees` (
+  `id` INT(15) NOT NULL,
+  `last_name` VARCHAR(45) NOT NULL,
+  `first_name` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `department` VARCHAR(45) NOT NULL,
+  `salary` DECIMAL(12,2) NOT NULL,
+   PRIMARY KEY (`id`));
+
+---------------------------------------------
+
+CREATE TABLE `test1`.`employees` (
+  `id` INT(15) NOT NULL AUTO_INCREMENT,
+  `last_name` VARCHAR(45) NOT NULL,
+  `first_name` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `department` VARCHAR(45) NOT NULL,
+  `salary` DECIMAL(12,2) NOT NULL,
+  `` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
+---------------------------------------------
+
+
+CREATE TABLE `test1`.`employees` (
+  `id` INT(12) NOT NULL AUTO_INCREMENT,
+  `last_name` VARCHAR(45) NOT NULL,
+  `first_name` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `department` VARCHAR(45) NOT NULL,
+  `salary` DECIMAL(12,2) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC));
+
+---------------------------------------------
+
+---[create table]---
+
+CREATE TABLE `test1`.`employees` (
+  `id` INT(14) NOT NULL AUTO_INCREMENT,
+  `last_name` VARCHAR(45) NOT NULL,
+  `first_name` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `department` VARCHAR(45) NOT NULL,
+  `salary` DECIMAL(12,2) NOT NULL,
+  PRIMARY KEY (`id`));
+
+
+
+
+
+
+CREATE TABLE `test1`.`employees` (`id` INT(14) NOT NULL AUTO_INCREMENT,`last_name` VARCHAR(45) NOT NULL, `first_name` VARCHAR(45) NOT NULL, `email` VARCHAR(45) NOT NULL,`department` VARCHAR(45) NOT NULL,`salary` DECIMAL(12,2) NOT NULL, PRIMARY KEY (`id`));
+
+
+---[insert row to table]---
+//// ALL Fields in 'employees` ::: table id`,`last_name`,`first_name`,`email`, `department`, `salary` ////
+
+INSERT INTO `employees` (`last_name`,`first_name`,`email`, `department`, `salary`) VALUES ('shalom','lizrovitch','lshalom@isracard.co.il', 'software', 55000.00);
+INSERT INTO `employees` (`last_name`,`first_name`,`email`, `department`, `salary`) VALUES ('yaron','kessler','ykessler@isracard.co.il', 'software', 55000.00);
+INSERT INTO `employees` (`last_name`,`first_name`,`email`, `department`, `salary`) VALUES ('yifat','harel','yharel@isracard.co.il', 'software', 55000.00);
+INSERT INTO `employees` (`last_name`,`first_name`,`email`, `department`, `salary`) VALUES ('noam','meiri','nMeiri@isracard.co.il', 'software', 55000.00);
+
+
+---------------------------------------------
+
+
+
+
+---[temp plsql code]---
+
+
+---Create DataBase---
+
+CREATE TABLE customer(
+firstName VARCHAR(30) NOT NULL,
+lastName VARCHAR(30) NOT NULL,
+custID INT UNSIGNED NOT NULL PRIMARY KEY);
+
+mysql -u root -p
+CREATE DATABASE test4;
+USE test4;
+
+CREATE TABLE customer(
+firstName VARCHAR(30) NOT NULL,
+lastName VARCHAR(30) NOT NULL,
+custID INT UNSIGNED NOT NULL PRIMARY KEY);
+
+CREATE USER 'dbadmin'@'localhost' IDENTIFIED BY 'turtledove';
+
+GRANT ALL PRIVILEGES ON test4.customer TO 
+'dbadmin'@'localhost' IDENTIFIED BY 'turtledove';
+
+ -->
+ 
+<!-- 
+2. Create new package com.newthinktank.JEETut3 
+3. Create Customer.java in the package
+
+
+---------------------------------------------
+
+
+
+---[temp plsql code]---
+
+create database if not exists demo;
+
+use demo;
+
+drop table if exists employees;
+
+CREATE TABLE `employees` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `last_name` varchar(64) DEFAULT NULL,
+  `first_name` varchar(64) DEFAULT NULL,
+  `email` varchar(64) DEFAULT NULL,
+  `department` varchar(64) DEFAULT NULL,
+  `salary` DECIMAL(10,2) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (1,'Doe','John','john.doe@foo.com', 'HR', 55000.00);
+INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (2,'Public','Mary','mary.public@foo.com', 'Engineering', 75000.00);
+INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (3,'Queue','Susan','susan.queue@foo.com', 'Legal', 130000.00);
+
+INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (4,'Williams','David','david.williams@foo.com', 'HR', 120000.00);
+INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (5,'Johnson','Lisa','lisa.johnson@foo.com', 'Engineering', 50000.00);
+INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (6,'Smith','Paul','paul.smith@foo.com', 'Legal', 100000.00);
+
+INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (7,'Adams','Carl','carl.adams@foo.com', 'HR', 50000.00);
+INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (8,'Brown','Bill','bill.brown@foo.com', 'Engineering', 50000.00);
+INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (9,'Thomas','Susan','susan.thomas@foo.com', 'Legal', 80000.00);
+
+INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (10,'Davis','John','john.davis@foo.com', 'HR', 45000.00);
+INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (11,'Fowler','Mary','mary.fowler@foo.com', 'Engineering', 65000.00);
+INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (12,'Waters','David','david.waters@foo.com', 'Legal', 90000.00);
+  
+  

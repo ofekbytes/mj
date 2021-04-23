@@ -1,0 +1,82 @@
+	 TODO:
+	 
+	 task: sorted array check value.
+	 
+	 [1,2,3,9]  Sum = 8  ==> false
+	 [1,2,4,4]  Sum = 8  ==> true
+	 
+	 simple 2 loops
+	 comparing every single possible pair, two/2 for loops, 
+	 one scanning the first array , the second for the second loop, 
+	 l loop, j loop, and test if sum equal to the target sum.
+	 
+	 
+	 [1,2,3,9]  Sum = 8
+	 
+	 
+	 i have one/1 and i am looking for 7 to match sum of 8
+	 i have two/2 and i am looking for 6 to match sum of 8
+	 
+	 	 
+	 simple 2 loops serach
+	 binary search
+	 quadratic search
+	 sorted list search
+	 vector - receive it as a vector
+	 data structure --> lookups -->  hash table lookup (constant time lookup) 
+	 
+	 linear solution 
+	 
+	 [1,2,4,4]  Sum = 8  ==> true
+	 1 + 4 = 8 smaller then 8
+	 2 + 4 = 8 smaller then 8
+	 4 + 8 = 8 ok 
+	 
+	 [1,2,3,9]  Sum = 8
+	 1 + 9 = 9 bigger then 8
+	 1 + 3 = 8 smaller then 8
+	 2 + 3 = 8 smaller then 8 
+	 if two compare in the same index of the array stop.
+	 
+	 return:
+	1) if result is the sum (8) --> return "true" else "false"
+	2) if result is the sum (8) --> return the pair that make the result true.
+	   (return an object, match=true; first pair:4 ; second pair:4) 
+	
+	
+	
+	-- example with c: (delete it)
+	boolean blHasPairWithSum (const vector <int> & data, int sum) {
+		int low = 0;
+		int high = data.size() - 1;
+		while(low < hi) {
+		// #1 option
+		// if(data[low] + data[high] == sum)
+		//	return true;
+		
+		// #2 option
+		int s = data[low] + data[high];
+		if (s == sum) return true;
+		
+	}
+	
+	//https://www.youtube.com/watch?v=XKu_SEDAykw&list=PL5Tw98-9k5IbDQnT09Za8Ndr1ZCZPmCU9&index=4
+	
+		-- example with c: (delete it)
+	boolean blHasPairWithSum (const vector <int> & data, int sum) {
+		unordered_set<int> comp; //complements
+		for (int value: data) {
+		   if (comp.find(value) != comp.end)
+		      return true;
+		   
+		   comp.add(sum-value);
+		}
+		
+		return false;
+	}
+	
+	
+	
+	
+	
+	

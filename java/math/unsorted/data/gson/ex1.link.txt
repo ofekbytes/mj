@@ -1,0 +1,9 @@
+
+
+---[ex1.link]----
+
+https://mkyong.com/java/how-to-parse-json-with-gson
+
+
+
+

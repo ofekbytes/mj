@@ -1,0 +1,21 @@
+
+
+---[mysql_connection]---
+
+	// driver //
+	private String driver = "com.mysql.jdbc.Driver";
+	
+	// DataBase url --> host: 'localhost' --> port:'3306' --> database:'test1' 
+	private String dbUrl = "jdbc:mysql://localhost:3306/test1"; //with port: 3306
+	
+	// DataBase url --> host: 'localhost' --> database:'test1' --> without port number.
+	private String dbUrl = "jdbc:mysql://localhost/test1";
+	
+	// DataBase user --> 'jron'
+	private String user = "jron";  //"dbadmin";
+	
+	// DataBase password
+	private String password = "koskas@1974.com"; //"2Wsxcde3";
+	
+	// DataBase Query
+	private String stQuery = "select * from customer";

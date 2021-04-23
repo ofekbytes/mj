@@ -1,0 +1,238 @@
+.
+.
+.
+---[mysql-general]---
+.
+.
+.
+
+---[ERROR 1698 (28000): Access denied for user 'root'@'localhost']---
+
+yaron@kessrv:~$ sudo mysql -u root 
+[sudo] password for yaron: 
+Sorry, try again.
+[sudo] password for yaron: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 131
+Server version: 10.0.38-MariaDB-0ubuntu0.16.04.1 Ubuntu 16.04
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| test1              |
+| test4              |
++--------------------+
+5 rows in set (0.00 sec)
+
+MariaDB [(none)]> use mysql;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [mysql]> show tables;
++---------------------------+
+| Tables_in_mysql           |
++---------------------------+
+| column_stats              |
+| columns_priv              |
+| db                        |
+| event                     |
+| func                      |
+| general_log               |
+| gtid_slave_pos            |
+| help_category             |
+| help_keyword              |
+| help_relation             |
+| help_topic                |
+| host                      |
+| index_stats               |
+| innodb_index_stats        |
+| innodb_table_stats        |
+| plugin                    |
+| proc                      |
+| procs_priv                |
+| proxies_priv              |
+| roles_mapping             |
+| servers                   |
+| slow_log                  |
+| table_stats               |
+| tables_priv               |
+| time_zone                 |
+| time_zone_leap_second     |
+| time_zone_name            |
+| time_zone_transition      |
+| time_zone_transition_type |
+| user                      |
++---------------------------+
+30 rows in set (0.00 sec)
+
+MariaDB [mysql]> CREATE USER 'admin'@'localhost' IDENTIFIED BY '';
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [mysql]> GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost'
+    -> ;
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [mysql]> GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [mysql]> UPDATE user SET plugin='auth_socket' WHERE User='admin';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [mysql]> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.00 sec)
+
+
+MariaDB [mysql]> 
+
+select * from user;
++-----------+---------+-------------------------------------------+-------------+-------------+-------------+-------------+-------------+-----------+-------------+---------------+--------------+-----------+------------+-----------------+------------+------------+--------------+------------+-----------------------+------------------+--------------+-----------------+------------------+------------------+----------------+---------------------+--------------------+------------------+------------+--------------+------------------------+----------+------------+-------------+--------------+---------------+-------------+-----------------+----------------------+-------------+-----------------------+------------------+---------+
+| Host      | User    | Password                                  | Select_priv | Insert_priv | Update_priv | Delete_priv | Create_priv | Drop_priv | Reload_priv | Shutdown_priv | Process_priv | File_priv | Grant_priv | References_priv | Index_priv | Alter_priv | Show_db_priv | Super_priv | Create_tmp_table_priv | Lock_tables_priv | Execute_priv | Repl_slave_priv | Repl_client_priv | Create_view_priv | Show_view_priv | Create_routine_priv | Alter_routine_priv | Create_user_priv | Event_priv | Trigger_priv | Create_tablespace_priv | ssl_type | ssl_cipher | x509_issuer | x509_subject | max_questions | max_updates | max_connections | max_user_connections | plugin      | authentication_string | password_expired | is_role |
++-----------+---------+-------------------------------------------+-------------+-------------+-------------+-------------+-------------+-----------+-------------+---------------+--------------+-----------+------------+-----------------+------------+------------+--------------+------------+-----------------------+------------------+--------------+-----------------+------------------+------------------+----------------+---------------------+--------------------+------------------+------------+--------------+------------------------+----------+------------+-------------+--------------+---------------+-------------+-----------------+----------------------+-------------+-----------------------+------------------+---------+
+| localhost | root    | *0013FCF463738B6082E2AE7562F153FAAE83D96F | Y           | Y           | Y           | Y           | Y           | Y         | Y           | Y             | Y            | Y         | Y          | Y               | Y          | Y          | Y            | Y          | Y                     | Y                | Y            | Y               | Y                | Y                | Y              | Y                   | Y                  | Y                | Y          | Y            | Y                      |          |            |             |              |             0 |           0 |               0 |                    0 | unix_socket |                       | N                | N       |
+| localhost | dbadmin | *0013FCF463738B6082E2AE7562F153FAAE83D96F | N           | N           | N           | N           | N           | N         | N           | N             | N            | N         | N          | N               | N          | N          | N            | N          | N                     | N                | N            | N               | N                | N                | N              | N                   | N                  | N                | N          | N            | N                      |          |            |             |              |             0 |           0 |               0 |                    0 |             |                       | N                | N       |
+| localhost | jron    | *9BF5139B57953DFE68A6EFBEB07EA9F7DCC3283E | N           | N           | N           | N           | N           | N         | N           | N             | N            | N         | N          | N               | N          | N          | N            | N          | N                     | N                | N            | N               | N                | N                | N              | N                   | N                  | N                | N          | N            | N                      |          |            |             |              |             0 |           0 |               0 |                    0 |             |                       | N                | N       |
+| localhost | admin   |                                           | Y           | Y           | Y           | Y           | Y           | Y         | Y           | Y             | Y            | Y         | N          | Y               | Y          | Y          | Y            | Y          | Y                     | Y                | Y            | Y               | Y                | Y                | Y              | Y                   | Y                  | Y                | Y          | Y            | Y                      |          |            |             |              |             0 |           0 |               0 |                    0 | auth_socket |                       | N                | N       |
++-----------+---------+-------------------------------------------+-------------+-------------+-------------+-------------+-------------+-----------+-------------+---------------+--------------+-----------+------------+-----------------+------------+------------+--------------+------------+-----------------------+------------------+--------------+-----------------+------------------+------------------+----------------+---------------------+--------------------+------------------+------------+--------------+------------------------+----------+------------+-------------+--------------+---------------+-------------+-----------------+----------------------+-------------+-----------------------+------------------+---------+
+4 rows in set (0.00 sec)
+
+
+MariaDB [mysql]> UPDATE mysql.user SET Password=PASSWORD('2Wsxcde3') WHERE USER='admin' AND Host='localhost';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+
+MariaDB [mysql]> select * from user;
++-----------+---------+-------------------------------------------+-------------+-------------+-------------+-------------+-------------+-----------+-------------+---------------+--------------+-----------+------------+-----------------+------------+------------+--------------+------------+-----------------------+------------------+--------------+-----------------+------------------+------------------+----------------+---------------------+--------------------+------------------+------------+--------------+------------------------+----------+------------+-------------+--------------+---------------+-------------+-----------------+----------------------+-------------+-----------------------+------------------+---------+
+| Host      | User    | Password                                  | Select_priv | Insert_priv | Update_priv | Delete_priv | Create_priv | Drop_priv | Reload_priv | Shutdown_priv | Process_priv | File_priv | Grant_priv | References_priv | Index_priv | Alter_priv | Show_db_priv | Super_priv | Create_tmp_table_priv | Lock_tables_priv | Execute_priv | Repl_slave_priv | Repl_client_priv | Create_view_priv | Show_view_priv | Create_routine_priv | Alter_routine_priv | Create_user_priv | Event_priv | Trigger_priv | Create_tablespace_priv | ssl_type | ssl_cipher | x509_issuer | x509_subject | max_questions | max_updates | max_connections | max_user_connections | plugin      | authentication_string | password_expired | is_role |
++-----------+---------+-------------------------------------------+-------------+-------------+-------------+-------------+-------------+-----------+-------------+---------------+--------------+-----------+------------+-----------------+------------+------------+--------------+------------+-----------------------+------------------+--------------+-----------------+------------------+------------------+----------------+---------------------+--------------------+------------------+------------+--------------+------------------------+----------+------------+-------------+--------------+---------------+-------------+-----------------+----------------------+-------------+-----------------------+------------------+---------+
+| localhost | root    | *0013FCF463738B6082E2AE7562F153FAAE83D96F | Y           | Y           | Y           | Y           | Y           | Y         | Y           | Y             | Y            | Y         | Y          | Y               | Y          | Y          | Y            | Y          | Y                     | Y                | Y            | Y               | Y                | Y                | Y              | Y                   | Y                  | Y                | Y          | Y            | Y                      |          |            |             |              |             0 |           0 |               0 |                    0 | unix_socket |                       | N                | N       |
+| localhost | dbadmin | *0013FCF463738B6082E2AE7562F153FAAE83D96F | N           | N           | N           | N           | N           | N         | N           | N             | N            | N         | N          | N               | N          | N          | N            | N          | N                     | N                | N            | N               | N                | N                | N              | N                   | N                  | N                | N          | N            | N                      |          |            |             |              |             0 |           0 |               0 |                    0 |             |                       | N                | N       |
+| localhost | jron    | *9BF5139B57953DFE68A6EFBEB07EA9F7DCC3283E | N           | N           | N           | N           | N           | N         | N           | N             | N            | N         | N          | N               | N          | N          | N            | N          | N                     | N                | N            | N               | N                | N                | N              | N                   | N                  | N                | N          | N            | N                      |          |            |             |              |             0 |           0 |               0 |                    0 |             |                       | N                | N       |
+| localhost | admin   | *0013FCF463738B6082E2AE7562F153FAAE83D96F | Y           | Y           | Y           | Y           | Y           | Y         | Y           | Y             | Y            | Y         | N          | Y               | Y          | Y          | Y            | Y          | Y                     | Y                | Y            | Y               | Y                | Y                | Y              | Y                   | Y                  | Y                | Y          | Y            | Y                      |          |            |             |              |             0 |           0 |               0 |                    0 | auth_socket |                       | N                | N       |
++-----------+---------+-------------------------------------------+-------------+-------------+-------------+-------------+-------------+-----------+-------------+---------------+--------------+-----------+------------+-----------------+------------+------------+--------------+------------+-----------------------+------------------+--------------+-----------------+------------------+------------------+----------------+---------------------+--------------------+------------------+------------+--------------+------------------------+----------+------------+-------------+--------------+---------------+-------------+-----------------+----------------------+-------------+-----------------------+------------------+---------+
+4 rows in set (0.00 sec)
+
+###
+### quit mysql ###
+###
+
+$ service mysql restart
+
+
+---------------------------------------------------------------------------------------------------------------
+
+---[ ERROR 1524 (HY000): Plugin 'auth_socket' is not loaded ]---
+
+
+
+I got a solution!
+
+When resetting root password at step 2), also change the auth plugin to mysql_native_password:
+
+use mysql;
+update user set authentication_string=PASSWORD("") where User='root';
+update user set plugin="mysql_native_password" where User='root';  # THIS LINE
+
+flush privileges;
+quit;
+This allowed me to log in successfully!
+
+Full code solution
+1. run bash commands
+1. first, run these bash commands
+sudo /etc/init.d/mysql stop # stop mysql service
+sudo mysqld_safe --skip-grant-tables & # start mysql without password
+# enter -> go
+mysql -uroot # connect to mysql
+2. then run mysql commands => copy paste this to cli manually
+use mysql; # use mysql table
+update user set authentication_string=PASSWORD("") where User='root'; # update password to nothing
+update user set plugin="mysql_native_password" where User='root'; # set password resolving to default mechanism for root user
+
+flush privileges;
+quit;
+3. run more bash commands
+sudo /etc/init.d/mysql stop 
+sudo /etc/init.d/mysql start # reset mysql
+# try login to database, just press enter at password prompt because your password is now blank
+mysql -u root -p 
+4. Socket issue (from your comments)
+When you see a socket error, a community came with 2 possible solutions:
+
+sudo mkdir -p /var/run/mysqld; sudo chown mysql /var/run/mysqld
+sudo mysqld_safe --skip-grant-tables &
+(thanks to @Cerin)
+
+Or
+
+mkdir -p /var/run/mysqld && chown mysql:mysql /var/run/mysqld  
+(thanks to @Peter Dvukhrechensky)
+
+Blind paths and possible edge errors
+Use 127.0.0.1 instead of localhost
+mysql -uroot # "-hlocalhost" is default
+Can lead to "missing file" or slt error.
+
+mysql -uroot -h127.0.0.1
+Works better.
+
+Skip the socket issue
+I've found many ways to create mysqld.sock file, change access rights or symlink it. It was not the issue after all.
+
+Skip the my.cnf file
+The issue also was not there. If you are not sure, this might help you.
+
+shareimprove this answer
+edited Nov 3 '18 at 18:22
+
+Kukanani
+57744 silver badges1818 bronze badges
+answered Jun 17 '16 at 10:36
+
+Tomáš Votruba
+14k88 gold badges4646 silver badges7272 bronze badges
+3
+Thank you for this. This is also an excellent answer on how to reset mysql root pass so you might want to slightly edit the title to help it come up before we already run into the socket issue. – Wtower Aug 22 '16 at 9:34
+1
+I'm glad it helped. How would you edit the title to keep origin message? I understand the solution requires to reset password, but it does not solve the issue in the title. This is more complex failure of more points. For root password reset, I'd go here: stackoverflow.com/a/6401963/1348344 – Tomáš Votruba Aug 22 '16 at 11:44 
+Thanks this seems to work. Any idea why the plugin definition needs to be tweaked? – matanster Jan 28 '17 at 18:25 
+1
+@matanster Not really, this is pure step-by-step trial-fail constructed. What OS do you use? – Tomáš Votruba Jan 28 '17 at 22:53
+If you cant use mysql_safe here's a way to achieve this using systemctl 'set enviroment' stackoverflow.com/questions/33510184/… – Rhyuk Jan 30 '17 at 15:15 
+8
+Your mysqld_safe call is incorrect. You need to instead run: sudo mkdir -p /var/run/mysqld; sudo chown mysql /var/run/mysqld; sudo mysqld_safe --skip-grant-tables & – Cerin Feb 26 '17 at 19:37
+The init.d scripts don't work with the mysqld_safe process on Ubuntu 16. – Cerin Feb 26 '17 at 19:45
+1
+Worked for me after applying @Cerin's steps. I also recommend changing the second update statement to update user set plugin="mysql_native_password" where User='root'; so it doesn't unintentionally affect other users. – Chris B Mar 6 '17 at 4:10 
+@Cerin Thanks for feedback. Can you edit the post and suggest changes? I'd be happy to accept them. – Tomáš Votruba Mar 10 '17 at 13:00
+@Cerin Did you get my message? I'm not sure what exact lines to replace. – Tomáš Votruba Jul 5 '17 at 19:37
+yeah, this solution it work for me, thank you. (same problem at macOS sierra 10.12.6, percona 5.7.18-16, installed by homebrew) – watchzerg Sep 3 '17 at 11:28
+And be sure to re-establish a root password. – Rick James May 18 '18 at 15:31
+You might want to mark this answer as the correct one with greeny, since it indeed is correct :) – Aleksei Matiushkin May 20 '18 at 3:25
+I am having same issue on windows how to fix that – Bilal Maqsood May 25 '18 at 9:35
+3
+Please add a posible solution of the socket issue to the answer. Like this one mkdir -p /var/run/mysqld && chown mysql:mysql /var/run/mysqld It may save someone's time – Peter Dvukhrechensky Aug 30 '18 at 6:58 
+Thanks for the comment, I've updated the answer. Is that correct? – Tomáš Votruba Aug 30 '18 at 7:55
+1
+Perfect Answer.!!!! Have been fiddling with the mysql config for too long, after resetting the root password. – Mohd Abdul Mujib Sep 28 '18 at 12:30
+Thanks! This was a super useful discussion. In the end I was not yet able to get my problem fixed with it, but most parts. Combining a couple of approaches I made a shell script that might come in handy for someone in the future: toxyl.github.io/mysql-innodb-recovery – Tox Dec 1 '18 at 21:08
+I was not able to stop mysql (step 3) when it was in safe mode (Ubuntu 16), and if you have multiple daemons running you will end up with issues (so be sure it's actually shutdown!). To stop mysql in safe mode I had to run this command: 'mysqladmin -u root -p shutdown' – ChronoFish Jan 7 '19 at 15:46 
+1
+great work, 3 hours later i'm glad i found this answer, installing mysql server is fun because stuff like makes you question your profession – acidjazz Mar 29 '19 at 1:42
+Indeed :D, I felt like quitting when I faced this for a week. I was just trying to store name and email in the user table. – Tomáš Votruba Mar 29 '19 at 1:44
+I see the following under journalctl -xn, it seems that the authentication plugin and password are mutually exclusive? "2019-05-07 14:06:14 9 [Warning] 'user' entry 'root@localhost' has both a password and an authentication plugin specified. The password will be ignored." – kirenpillay May 7 '19 at 12:09 
+
+
+
+
+

@@ -1,0 +1,75 @@
+
+
+---[ex1.manual]----
+
+
+- Gson have methods: 
+-- toJson() method - convert Java Object -to- JSON.
+-- fromJson() method - convert JSON -to- Java objects.
+
+
+--- example: Java Object -to- JSON.
+
+	Gson gson = new Gson();
+	
+	// 1. Java object to JSON file
+	gson.toJson(obj, new FileWriter("C:\\fileName.json"));
+	
+	// 2. Java object to JSON string
+	String json = gson.toJson(obj);
+	
+	
+--- example: JSON -to- Java Object. 
+
+	Gson gson = new Gson();
+
+	// 1. JSON file to Java object
+	Object object = gson.fromJson(new FileReader("C:\\fileName.json"), Object.class);
+	
+	// 2. JSON string to Java object
+	String json = "{'name' : 'mkyong'}";
+	Object object = gson.fromJson(json, Staff.class);
+
+
+-- Donload GSON with "pom.xml"  
+
+---[pom.xml]----
+
+<dependency>
+	<groupId>com.google.code.gson</groupId>
+	<artifactId>gson</artifactId>
+	<version>2.8.5</version>
+</dependency>
+
+----------------
+
+
+--- example: pom.xml file.
+
+---[pom.xml]----
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>ex1</groupId>
+	<artifactId>ex1</artifactId>
+	<version>1.1.1</version>
+	<name>ex1</name>
+	<description>ex1</description>
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.0</version>
+		</dependency>
+	</dependencies>
+</project>
+
+----------------
+
+
+

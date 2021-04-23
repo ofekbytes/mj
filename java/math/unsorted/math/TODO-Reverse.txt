@@ -1,0 +1,11 @@
+
+
+source number: 12345
+target number: 54321
+reverse number without Array -or- String -or- Object
+
+
+create a few method
+1) count total digit in the source number
+2) cut the number and pass them to the target number
+

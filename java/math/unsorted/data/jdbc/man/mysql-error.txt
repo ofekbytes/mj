@@ -1,0 +1,189 @@
+
+
+---------------------------------------------------------------------------------------------------------------
+
+---[ERROR 1698 (28000): Access denied for user 'root'@'localhost']---
+
+
+---[1]------------------------
+1013
+
+Some systems like Ubuntu, mysql is using by default the UNIX auth_socket plugin.
+
+Basically means that: db_users using it, will be "auth" by the system user credentias. You can see if your root user is set up like this by doing the following:
+
+$ sudo mysql -u root # I had to use "sudo" since is new installation
+
+mysql> USE mysql;
+mysql> SELECT User, Host, plugin FROM mysql.user;
+
++------------------+-----------------------+
+| User             | plugin                |
++------------------+-----------------------+
+| root             | auth_socket           |
+| mysql.sys        | mysql_native_password |
+| debian-sys-maint | mysql_native_password |
++------------------+-----------------------+
+As you can see in the query, the root user is using the auth_socket plugin
+
+There are 2 ways to solve this:
+
+You can set the root user to use the mysql_native_password plugin
+You can create a new db_user with you system_user (recommended)
+Option 1:
+
+$ sudo mysql -u root # I had to use "sudo" since is new installation
+
+mysql> USE mysql;
+mysql> UPDATE user SET plugin='mysql_native_password' WHERE User='root';
+mysql> FLUSH PRIVILEGES;
+mysql> exit;
+
+$ service mysql restart
+Option 2: (replace YOUR_SYSTEM_USER with the username you have)
+
+$ sudo mysql -u root # I had to use "sudo" since is new installation
+
+mysql> USE mysql;
+mysql> CREATE USER 'YOUR_SYSTEM_USER'@'localhost' IDENTIFIED BY '';
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'YOUR_SYSTEM_USER'@'localhost';
+mysql> UPDATE user SET plugin='auth_socket' WHERE User='YOUR_SYSTEM_USER';
+mysql> FLUSH PRIVILEGES;
+mysql> exit;
+
+$ service mysql restart
+Remember that if you use option #2 you'll have to connect to mysql as your system username (mysql -u YOUR_SYSTEM_USER)
+
+Note: On some systems (e.g., Debian stretch) 'auth_socket' plugin is called 'unix_socket', so the corresponding SQL command should be: UPDATE user SET plugin='unix_socket' WHERE User='YOUR_SYSTEM_USER';
+
+Update: from @andy's comment seems that mysql 8.x.x updated/replaced the auth_socket for caching_sha2_password I don't have a system setup with mysql 8.x.x to test this, however the steps above should help you to understand the issue. Here's the reply:
+
+One change as of MySQL 8.0.4 is that the new default authentication plugin is 'caching_sha2_password'. The new 'YOUR_SYSTEM_USER' will have this auth plugin and you can login from the bash shell now with "mysql -u YOUR_SYSTEM_USER -p" and provide the password for this user on the prompt. No need for the "UPDATE user SET plugin" step. For the 8.0.4 default auth plugin update see, https://mysqlserverteam.com/mysql-8-0-4-new-default-authentication-plugin-caching_sha2_password/
+
+shareimprove this answer
+edited Apr 4 '19 at 3:37
+
+Erich
+89366 silver badges2020 bronze badges
+answered Mar 12 '17 at 1:17
+
+zetacu
+10.6k11 gold badge1313 silver badges2121 bronze badges
+5
+Option 1 worked for me. But then I also needed to run sudo gedit /etc/phpmyadmin/config.inc.php. Then I did a search for AllowNoPassword and uncommented both lines that contained it. Then I was able to login as root with no password. – Joe Sep 27 '17 at 15:46
+1
+This percona blog post helped me a bit. percona.com/blog/2016/03/16/… Sounds like this happens if you try to skip setting a password for root, which then causes the 'auth_plugin' to use the unix auth_socket, which apparently just compares users. – Josh Brown Dec 19 '17 at 2:42
+7
+Option 2 works. I think its always best practice to create a new user and use leaving root to be there! – PasinduJay Feb 13 '18 at 6:02
+1
+the IDENTIFIED BY '' bit should probably be IDENTIFIED BY 'YOUR_PASSWD' – YakovL Mar 6 '18 at 9:56
+And that's why I prefer using PostgreSQL – problemofficer Apr 23 '18 at 2:35
+People need to know about this, I reached here after 1hr of surfing. Man you saved my day. – Nandesh May 5 '18 at 17:23
+4
+Finally, an answer that actually works !! There's a zillion answers out there saying do mysqld_safe --skip-grant-tables etc, and it's not been working. – Stewart May 12 '18 at 10:20
+It worked. However, beware that changing the plugin as per Option #1 may end up in being forced to reset the root password with 'mysqld_safe --skip-grant-tables'. Then it works. – Jorj May 20 '18 at 19:27
+2
+Ok, how to do this, if sudo mysql -u root -p doesn't let me in? – Hrvoje T May 28 '18 at 12:45
+@HrvojeT can you describe a bit more the error. most of the times that could be a typo, or that for some reason the root user doesn't exist try this sudo /etc/init.d/mysql stop then sudo mysqld --skip-grant-tables & in the mysql console type use mysql; and finally `select user,host from user where user='root' \G you might find out that for some reason the root user doesn't even exist. – zetacu May 29 '18 at 23:52
+@zetacu I mean how can I enter in mysql with root user if the error is access denied like in OP. Obviously, the solution is to create a database from start. – Hrvoje T May 30 '18 at 5:23
+@Hrvoje have you tried simply sudo mysql -u root - since auth is not password but as the user you are accessing mysql as (i.e. root) – Claire Furney Jul 11 '18 at 21:43
+plugin value was initially unix_socket for me and otherwise all worked great - thank you – Claire Furney Jul 11 '18 at 21:45
+@zetacu Thanks. This was the cause. We fixed it in Ubuntu. Just FYI, we tried in CentOS - it did not have this issue. So I guess this was done at Ubuntu end - to use linux root interface instead of mysql standalone authentication. – Rahul Sep 13 '18 at 15:02 
+Thanks @zetacu. How can I avoid sudo from sudo mysql -u root -p ? – abu abu Sep 15 '18 at 2:25
+1
+@abu abu Hi Abu. You can avoid sudo by logging into the root user before executing the command. Initially when you login you can login as 'root' or a user that has root privileges. Else, before sudo, we can use 'sudo su', su meaning superuser before the line. Without root we cant execute admin level commands. – Rahul Sep 18 '18 at 6:32 
+1
+Thanks for this very helpful and detailed solution. One change as of MySQL 8.0.4 is that the new default authentication plugin is 'caching_sha2_password'. The new 'YOUR_SYSTEM_USER' will have this auth plugin and you can login from the bash shell now with "mysql -u YOUR_SYSTEM_USER -p" and provide the password for this user on the prompt. No need for the "UPDATE user SET plugin" step. For the 8.0.4 default auth plugin update see, mysqlserverteam.com/… – Andy Oct 11 '18 at 22:58 
+Thank You . OPTION 1 works for me . – Coder Me Jan 31 '19 at 19:31
+The first option worked for me. Thanks! Although, if I am not wrong after performing the second option, the first option has to be done on the YOUR_SYSTEM_USER i.e., change the plugin of newly made user to mysql_native_password. OR The plugin can be set as 'mysql_native_password' while performing the second option in this line mysql> UPDATE user SET plugin='mysql_native_password' WHERE User='YOUR_SYSTEM_USER'; What do you think? – Gaurav Sachdeva Feb 7 '19 at 21:53 
+the second option is meant to use the "new" (not new anymore) auth_socket (or any other name on each system) plugin you can for sure mix it and instead of using the auth_socket you can change it to use the mysql_native_password , if you do that then you'll have to use the mysql password that can be different from the system password. – zetacu Feb 28 '19 at 19:33
+Thank you saved my day. :) – BEPP May 10 '19 at 17:29 
+1
+If using MariaDB, use the steps here instead -> stackoverflow.com/a/57532576/69739 – Virat Kadaru Oct 10 '19 at 19:41
+You can do user and plugin in one line: CREATE USER 'YOUR_SYSTEM_USER'@'localhost' IDENTIFIED WITH auth_socket; – malhal Jan 3 at 15:37
+OPTION 1 worked for me. Ubuntu 18.04 – PA-GW Jan 30 at 18:38
+Broken tutorial :( Thanks :) – Illegal Operator Mar 1 at 9:52
+add a comment
+
+
+
+---[2]------------------------ 
+
+
+Check here:
+
+NEW Version of MYSQL does it this way.
+
+In the new my-sql if the password is left empty while installing then it is based on the auth_socket plugin.
+
+The correct way is to login to my-sql with sudo privilege.
+
+$ sudo mysql -u root -p
+And then updating the password using:
+
+$ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'new-password';
+$ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '2Wsxcde3';
+
+Once this is done stop and start the mysql server.
+
+$  sudo service mysql stop
+$  sudo service mysql start
+For complete details you can refer to this link.
+
+Do comment for any doubt.
+
+shareimprove this answer
+edited Oct 25 '18 at 6:27
+answered Sep 14 '18 at 16:17
+
+Nandesh
+2,12311 gold badge1414 silver badges2020 bronze badges
+3
+This worked for me using Ubuntu 18. Thanks sooo much. – Peter Drinnan Nov 30 '18 at 15:17
+7
+Worked as well on ubuntu 18.04 – sgtkuncoro Dec 15 '18 at 17:47 
+1
+Exactly what I was looking for. Thank you :) Worked on Ubuntu 18 – Manthan_Admane Apr 18 '19 at 9:49 
+1
+this worked like a charm, lubuntu 19.04 – Kvvaradha Jul 30 '19 at 19:29
+That worked for my dev server as a quick fix (Ubuntu 18.04 server), however, I do recommend looking into the above-accepted answer, and furthermore, refrain from installing PHPMyAdmin on a production server altogether. – Aaron Murray Oct 5 '19 at 22:19
+"-p" is not necessary when using "sudo" – Aliaksandr Adzinets Nov 30 '19 at 23:14
+1
+This works well. The link is useful. – kjohri Jan 26 at 17:11
+add a comment
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------
+
+
+
+
+---[ ERROR 1524 (HY000): Plugin 'auth_socket' is not loaded ]---
+
+
+
+
+
+---[todo]------------------------------------------------------------------------------------------------------------
+
+check service start/stop (on/off) ?
+
+
+Your connection attempt failed for user 'root' from your host to server at localhost:3306:
+  Access denied for user 'root'@'localhost'
+
+Please:
+1 Check that mysql is running on server localhost
+2 Check that mysql is running on port 3306 (note: 3306 is the default, but this can be changed)
+3 Check the root has rights to connect to localhost from your address (mysql rights define what clients can connect to the server and from which machines) 
+4 Make sure you are both providing a password if needed and using the correct password for localhost connecting from the host address you're connecting from
+
+---------------------------------------------------------------------------------------------------------------
+
+
+
+
+---------------------------------------------------------------------------------------------------------------

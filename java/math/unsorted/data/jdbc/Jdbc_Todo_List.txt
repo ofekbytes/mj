@@ -1,0 +1,36 @@
+
+
+---[Jdbc_Todo_List]---
+
+
+1. Download DataBase Server
+
+1.1. Download MySql server
+	 https://downloads.mysql.com/archives/community/
+	 
+1.2. Download MySql MariaDB server
+     https://mariadb.org/download/
+
+1.3. Download Amazon DynamoDB
+	 https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html
+	 https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html
+	 https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.Maven.html
+	 https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.Docker.html
+	 https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.UsageNotes.html
+	 
+1.4. Download ...
+
+
+2. Download Java Mysql JDBC Driver
+   https://dev.mysql.com/downloads/connector/j/
+   
+	 	
+
+---[other.unsorted----------------------------------------
+
+1.??. Build Databases for Free on AWS 
+      https://aws.amazon.com/free/database/?trk=ps_a131L0000057lCCQAY&trkCampaign=acq_paid_search&sc_channel=ps&sc_campaign=acquisition_il&sc_publisher=google&sc_category=Database&sc_country=IL&sc_geo=EMEA&sc_outcome=acq&sc_detail=%2Bmariadb&sc_content=mariadb_bmm&sc_segment=381996202204&sc_medium=ACQ-P|PS-GO|Non-Brand|Desktop|SU|Database|Solution|IL|EN|Text&s_kwcid=AL!4422!3!381996202204!b!!g!!%2Bmariadb&ef_id=CjwKCAjwmKLzBRBeEiwACCVihrS3vfCBcpDGQu6Ew33zNnp_FC_Mc5T5_zLjsh6xCsa0bWdoFa8ZcRoC0YMQAvD_BwE:G:s
+      
+----------------------------------------------------------     
+      
+
