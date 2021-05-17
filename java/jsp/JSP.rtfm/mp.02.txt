@@ -1,0 +1,56 @@
+
+jsp scripting elements
+
+* jsp expression
+** <%= jsp expression %>
+
+* jsp scriptlet
+** <% jsp scriptlet -- 1 to N line of code %>
+
+
+* jsp declaration - declare a method in "jsp" page and then call the method from the same "jsp" page.
+** <%! variable -or- method declaration %>
+
+
+* jsp best practice 
+** minimize the "scriptlet" and "declaration" in "jsp".
+** avoid dumping thousands of lines of code in "jsp".
+** refactor this into a separate java class (mvc).
+*** "jsp"  --<call>--  "java-class"
+
+* task.
+** create a new package under "src" package.
+***  mouse right click inside [WebContent] folder --> "New" --> "package"
+**** package name ::  "com.ofekbytes.jsp".
+
+** create a new class
+***  mouse right click inside [WebContent] folder --> "New" --> "class"
+**** class name ::  "MyUtils" ---- "src/com/ofekbytes/jsp/MyUtils.java" -->
+**** call java class "package-name.class-name.method-name"   	
+   	 <%= package com.ofekbytes.jsp  %>
+
+** import package
+*** <%@page import="com.ofekbytes.jsp.MyUtils"%>
+*** <%@page import="com.ofekbytes.jsp.*"%>
+*** <%@page import="com.ofekbytes.jsp.MyUtils,java.MyUtils.ArrayList"%>
+
+*** calling method in java class
+
+---[jsp]--------------------------------------------------------------
+	<div> Long calling >> :: toLowerCase :: <%= com.ofekbytes.jsp.MyUtils.strToLower("LONG-PATH")  %>  </div>	
+	<div> Short calling >> TEST :: toLowerCase :: <%= MyUtils.strToLower("SHORT-PATH")  %> <div>
+----------------------------------------------------------------------
+
+---[java Class]--------------------------------------------------------------
+	package com.ofekbytes.jsp;
+
+	public class MyUtils {
+		public static String strToLower(String data) {
+			return data.toLowerCase();
+		}
+	}
+-----------------------------------------------------------------------------
+
+
+
+

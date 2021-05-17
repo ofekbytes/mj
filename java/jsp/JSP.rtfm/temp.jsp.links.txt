@@ -1,0 +1,18 @@
+
+jsp links
+
+https://beginnersbook.com/2017/10/java-date-format-to-display-the-day-of-the-week/
+
+https://beginnersbook.com/2013/04/java-date-format/
+
+https://beginnersbook.com/2017/10/java-time-in-milliseconds-format/
+
+https://beginnersbook.com/2017/10/java-add-days-to-date/
+
+https://beginnersbook.com/2014/01/how-to-convert-12-hour-time-to-24-hour-date-in-java/
+
+https://beginnersbook.com/2013/05/java-date-timezone/
+
+
+
+

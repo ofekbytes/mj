@@ -1,0 +1,41 @@
+
+---[new project]----------------------------------------------------------------
+
+1. select from the "menu-bar" --> File --> new --> "Dynamic Web Project".
+   "Dynamic Web Project" dialog is now open
+
+2. "Dynamic Web Project" dialog
+    project name: "jsp.project.Name"
+    
+3. press finish.
+
+--------------------------------------------------------------------------------
+
+
+
+---[project folder content]-----------------------------------------------------
+
+* [WebContent]
+*****[META-INF]
+*****[WEB-INF]
+
+--------------------------------------------------------------------------------
+
+
+
+---[new <.jsp> file]------------------------------------------------------------
+
+ [WebContent] folder locate all the <.jsp> files
+ 
+ * mouse right click inside [WebContent] folder --> "New" --> "File"
+ ** "File Name" --> "hello-world.jsp"
+    
+--------------------------------------------------------------------------------
+
+
+
+---[run <.jsp> file]------------------------------------------------------------
+
+ * mouse right click inside <"hello-world.jsp"> file --> "Run As" --> "Run On Server"
+
+--------------------------------------------------------------------------------
