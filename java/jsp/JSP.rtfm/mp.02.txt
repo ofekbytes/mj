@@ -1,5 +1,5 @@
 
-jsp scripting elements
+---[jsp scripting elements]----------------------------------------------------------------
 
 * jsp expression
 ** <%= jsp expression %>
@@ -7,10 +7,11 @@ jsp scripting elements
 * jsp scriptlet
 ** <% jsp scriptlet -- 1 to N line of code %>
 
-
 * jsp declaration - declare a method in "jsp" page and then call the method from the same "jsp" page.
 ** <%! variable -or- method declaration %>
 
+
+---[jsp declaration]-----------------------------------------------------------------------------------------
 
 * jsp best practice 
 ** minimize the "scriptlet" and "declaration" in "jsp".

@@ -1,0 +1,46 @@
+
+---[JSP built-in Server Objects]----------------------------------------------------------------
+
+
+* request
+** contains HTTP request headers from form data
+
+
+* response
+** provide HTTP support for sending response
+
+
+* out
+** JspWriter for including content in HTML page.
+*** example: 
+	out.println("<h1> Welcome . . . </h1>");
+
+	
+* session
+** Unique session for each user of the web application.
+
+
+* application
+** shared data for all users of the web application.
+
+------------------------------------------------------------------------------------------------
+
+
+---[HTTP request/response]----------------------------------------------------------------
+
+[web browser]  -----[request]-----> [JSP]
+
+[web browser] <-----[response]----- [JSP]
+
+
+* 
+** "web-browser" connect to JSP
+** "HTTP protocol" send our "request" object ("heade"r and "body" information)
+** "JSP" receive the information, 
+** "JSP" do something with the information.
+** "JSP" send a response to the web-browser.
+
+
+
+
+ 

@@ -15,9 +15,9 @@
     	<br/><br/><br/>
     	<hr/>
 
-		<div> Long calling >> :: toLowerCase :: <%= com.ofekbytes.jsp.MyUtils.strToLower("LONG-PATH")  %>  </div>
+		<div> Method Long calling >> :: toLowerCase :: <%= com.ofekbytes.jsp.MyUtils.strToLower("LONG-PATH")  %>  </div>
 		
-   	 	<div> Short calling >> TEST :: toLowerCase :: <%= MyUtils.strToLower("SHORT-PATH")  %> <div>
+   	 	<div> Method Short calling >> TEST :: toLowerCase :: <%= MyUtils.strToLower("SHORT-PATH")  %> <div>
    	 
     </div>    	
 </body>
