@@ -1,2 +1,2 @@
-# mj
-my joyride - playground (temp)
+# mj :yum:
+my joyride - playground (temp) :star_struck:
