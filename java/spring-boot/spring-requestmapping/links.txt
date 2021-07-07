@@ -1,0 +1,5 @@
+
+
+https://www.journaldev.com/3358/spring-requestmapping-requestparam-pathvariable-example
+
+
