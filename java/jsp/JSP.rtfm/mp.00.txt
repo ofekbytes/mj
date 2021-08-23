@@ -1,0 +1,22 @@
+
+
+---[jsp / servlet]----------------------------------------------------------------
+
+jsp and servlet is java code that run on the web Server
+and read user action (request) form html page and perform a task
+when done performing the task he will return html page as response.
+
+
+
+---[HTTP request/response]----------------------------------------------------------------
+
+[web browser]  -----[request]-----> [JSP] --> [request] --> [DataBase]
+
+[web browser] <-----[response]----- [JSP] <-- [result/response] <-- [DataBase]
+
+
+---[framework uses jsp / servlet]----------------------------------------------------------------
+
+-- spring 
+-- jsf
+-- struts 
